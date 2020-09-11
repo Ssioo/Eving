@@ -1,12 +1,14 @@
 package com.whoissio.eving
 
 import android.bluetooth.BluetoothDevice
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_le.view.*
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.android.synthetic.main.item_addable_ble_device.view.*
 
 class LeDeviceListAdapter : RecyclerView.Adapter<LeDeviceListAdapter.LeViewHolder>() {
 
@@ -25,12 +27,18 @@ class LeDeviceListAdapter : RecyclerView.Adapter<LeDeviceListAdapter.LeViewHolde
 
     class LeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindTo(item: BluetoothDevice) {
-            itemView.findViewById<TextView>(R.id.text_le).text = item.address
+            itemView.text_device_name_ble.text = item.name ?: item.address
+            itemView.btn_connect_ble.setOnClickListener {
+                MaterialAlertDialogBuilder(itemView.context).setMessage("디바이스를 연결할까요?").setPositiveButton("확인",
+                    { dialog, which ->
+                        dialog.dismiss()
+                    }).create().show()
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeViewHolder =
-        LeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_le, parent, false))
+        LeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_addable_ble_device, parent, false))
 
     override fun onBindViewHolder(holder: LeViewHolder, position: Int) {
         items.get(position)?.let {
