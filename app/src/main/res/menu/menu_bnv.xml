@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="HOME"
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:title="SEARCH"
+        android:icon="@drawable/ic_search"
+        android:id="@+id/menu_search"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:title="MYPAGE"
+        android:icon="@drawable/ic_person"
+        android:id="@+id/menu_mypage"
+        app:showAsAction="ifRoom"/>
+</menu>

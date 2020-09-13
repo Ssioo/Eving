@@ -1,16 +1,14 @@
 package com.whoissio.eving
 
 import android.bluetooth.BluetoothDevice
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.item_addable_ble_device.view.*
 
-class LeDeviceListAdapter : RecyclerView.Adapter<LeDeviceListAdapter.LeViewHolder>() {
+class NewLeDeviceRecyclerAdapter : RecyclerView.Adapter<NewLeDeviceRecyclerAdapter.LeViewHolder>() {
 
     private val items: ArrayList<BluetoothDevice?> = ArrayList()
 
