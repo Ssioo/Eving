@@ -76,7 +76,19 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.0-beta01'
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
+    // https://github.com/square/okhttp
+    implementation 'com.squareup.okhttp3:okhttp:4.8.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
+
+    // https://github.com/square/retrofit/tree/master/retrofit-converters/gson
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+
+    // https://github.com/bumptech/glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // https://github.com/orhanobut/logger
+    implementation 'com.orhanobut:logger:2.2.0'
 }

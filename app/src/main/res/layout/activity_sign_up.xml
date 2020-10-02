@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.whoissio.eving.viewmodels.SignUpViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:navigationIcon="@drawable/ic_back_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#FFF"
+                android:text="회원가입"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_sign_up"
+            app:layout_constraintBottom_toTopOf="@id/btn_sign_up">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이메일"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_c8c8c8_round4border1_transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_email"
+                    app:layout_constraintBottom_toTopOf="@id/tv_pw"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:paddingHorizontal="20dp"
+                    android:text="@={vm.email}"
+                    android:textColor="#333"
+                    android:inputType="textEmailAddress"
+                    android:hint="이메일을 입력해주세요"
+                    android:textColorHint="#c8c8c8"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_pw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비밀번호"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_email" />
+
+                <EditText
+                    android:id="@+id/et_pw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_c8c8c8_round4border1_transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pw"
+                    app:layout_constraintBottom_toTopOf="@id/tv_gender"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:paddingHorizontal="20dp"
+                    android:textColor="#333"
+                    android:inputType="textPassword"
+                    android:text="@={vm.pw}"
+                    android:hint="비밀번호를 입력해주세요"
+                    android:textColorHint="#c8c8c8"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="성별"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_pw" />
+
+                <TextView
+                    android:id="@+id/tv_gender_male"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="14dp"
+                    android:gravity="center"
+                    android:text="남자"
+                    android:letterSpacing="0"
+                    android:textSize="14sp"
+                    android:textColor="@{vm.gender == 1 ? @android:color/white : @color/colorTitle}"
+                    android:background="@{vm.gender == 1 ? @drawable/background_solid_colorprimary : @drawable/background_border_backlight}"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:onClick="@{() -> vm.onClickGender(1)}"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gender"
+                    app:layout_constraintBottom_toTopOf="@id/tv_birth"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_gender_female" />
+
+                <TextView
+                    android:id="@+id/tv_gender_female"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="14dp"
+                    android:gravity="center"
+                    android:text="여자"
+                    android:letterSpacing="0"
+                    android:textSize="14sp"
+                    android:textColor="@{vm.gender == 2 ? 0xffffffff : 0xff333333}"
+                    android:background="@{vm.gender == 2 ? @drawable/background_solid_colorprimary : @drawable/background_border_backlight}"
+                    android:layout_marginEnd="20dp"
+                    android:onClick="@{() -> vm.onClickGender(2)}"
+                    app:layout_constraintTop_toTopOf="@id/tv_gender_male"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_gender_male"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_gender_male" />
+
+
+                <TextView
+                    android:id="@+id/tv_birth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="생년월일"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gender_male" />
+
+                <TextView
+                    android:id="@+id/et_birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_c8c8c8_round4border1_transparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_birth"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:paddingHorizontal="20dp"
+                    android:textColor="#333"
+                    android:text="@={vm.birth}"
+                    android:textAlignment="center"
+                    android:inputType="textEmailAddress"
+                    android:hint="YYYY  /  MM  /  DD"
+                    android:textColorHint="#c8c8c8"
+                    android:textSize="14sp"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minHeight="0dp"
+            android:paddingVertical="14dp"
+            android:onClick="@{() -> vm.onClickSubmit()}"
+            android:text="가입하기"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:letterSpacing="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -16,7 +16,7 @@ import androidx.lifecycle.Observer
 import com.whoissio.eving.networks.NetworkEvent
 import com.whoissio.eving.utils.SimpleMessageDialog
 
-abstract class BaseFragment<B: ViewDataBinding,VM: BaseViewModel>(@LayoutRes override val layoutId: Int): Fragment(layoutId), BaseFragmentView<VM> {
+abstract class BaseFragment<B: ViewDataBinding, VM: BaseViewModel>(@LayoutRes override val layoutId: Int): Fragment(layoutId), BaseFragmentView<VM> {
 
     protected lateinit var viewmodel: VM
     protected var binding: B? = null
