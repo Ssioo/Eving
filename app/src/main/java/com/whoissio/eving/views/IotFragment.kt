@@ -1,4 +1,4 @@
-package com.whoissio.eving
+package com.whoissio.eving.views
 
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
@@ -11,16 +11,19 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.whoissio.eving.BaseFragment
+import com.whoissio.eving.R
+import com.whoissio.eving.databinding.FragmentBleDevicesBinding
+import com.whoissio.eving.viewmodels.IotFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_ble_devices.*
 
-class BleDevicesFragment: Fragment(R.layout.fragment_ble_devices) {
-
+class IotFragment(override val layoutId: Int = R.layout.fragment_ble_devices)
+    : BaseFragment<FragmentBleDevicesBinding, IotFragmentViewModel>(layoutId) {
     companion object {
         const val REQUEST_ENABLE_BT = 100
         const val REQUEST_FINE_LOCATION = 101
@@ -30,11 +33,21 @@ class BleDevicesFragment: Fragment(R.layout.fragment_ble_devices) {
     private val bluetoothLeScanner = BluetoothAdapter.getDefaultAdapter().bluetoothLeScanner
     private var mScanning = false
     private val handler = Handler()
+    val leScanCallback = object : ScanCallback() {
+        override fun onScanResult(callbackType: Int, result: ScanResult?) {
+            super.onScanResult(callbackType, result)
+            Log.d("DeviceName", result.toString())
+            viewmodel.newIotRecyclerAdapter.addDevice(result?.device)
+        }
+    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun getViewModel(): IotFragmentViewModel {
+        return ViewModelProvider(this).get(IotFragmentViewModel::class.java)
+    }
 
-        rv_bles.adapter = leDeviceListAdapter
+    override fun initView(savedInstanceState: Bundle?) {
+        rv_bles.adapter = viewmodel.newIotRecyclerAdapter
+        rv_my_bles.adapter = viewmodel.myIotAdapter
         btn_edit_bles.setOnClickListener {
             MaterialAlertDialogBuilder(activity!!)
                 .setMessage("디바이스를 편집할까요?")
@@ -57,14 +70,7 @@ class BleDevicesFragment: Fragment(R.layout.fragment_ble_devices) {
                 REQUEST_FINE_LOCATION
             )
         } else {
-            val bluetoothManager = context?.getSystemService(BLUETOOTH_SERVICE) as BluetoothManager?
-            val bluetoothAdapter = bluetoothManager?.adapter
-            if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled) {
-                val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
-            } else {
-                scanLeDevice()
-            }
+            tryScanIotDevices()
         }
     }
 
@@ -82,20 +88,24 @@ class BleDevicesFragment: Fragment(R.layout.fragment_ble_devices) {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_FINE_LOCATION && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-            val bluetoothManager = context?.getSystemService(BLUETOOTH_SERVICE) as BluetoothManager?
-            val bluetoothAdapter = bluetoothManager?.adapter
-            if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled) {
-                val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
-            } else {
-                scanLeDevice()
-            }
+            tryScanIotDevices()
+        }
+    }
+
+    private fun tryScanIotDevices() {
+        val bluetoothManager = context?.getSystemService(BLUETOOTH_SERVICE) as BluetoothManager?
+        val bluetoothAdapter = bluetoothManager?.adapter
+        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled) {
+            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
+        } else {
+            scanLeDevice()
         }
     }
 
     private fun scanLeDevice() {
         if (!mScanning) {
-            leDeviceListAdapter.clear()
+            viewmodel.newIotRecyclerAdapter.clear()
             handler.postDelayed({
                 mScanning = false
                 bluetoothLeScanner.stopScan(leScanCallback)
@@ -105,15 +115,6 @@ class BleDevicesFragment: Fragment(R.layout.fragment_ble_devices) {
         } else {
             mScanning = false
             bluetoothLeScanner.stopScan(leScanCallback)
-        }
-    }
-
-    private val leDeviceListAdapter = NewLeDeviceRecyclerAdapter()
-    private val leScanCallback = object : ScanCallback() {
-        override fun onScanResult(callbackType: Int, result: ScanResult?) {
-            super.onScanResult(callbackType, result)
-            Log.d("DeviceName", result?.device.toString())
-            leDeviceListAdapter.addDevice(result?.device)
         }
     }
 }

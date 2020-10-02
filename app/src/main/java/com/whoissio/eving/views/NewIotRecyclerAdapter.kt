@@ -1,14 +1,17 @@
-package com.whoissio.eving
+package com.whoissio.eving.views
 
 import android.bluetooth.BluetoothDevice
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.whoissio.eving.R
 import kotlinx.android.synthetic.main.item_addable_ble_device.view.*
+import kotlin.collections.ArrayList
 
-class NewLeDeviceRecyclerAdapter : RecyclerView.Adapter<NewLeDeviceRecyclerAdapter.LeViewHolder>() {
+class NewIotRecyclerAdapter : RecyclerView.Adapter<NewIotRecyclerAdapter.LeViewHolder>() {
 
     private val items: ArrayList<BluetoothDevice?> = ArrayList()
 
@@ -27,10 +30,11 @@ class NewLeDeviceRecyclerAdapter : RecyclerView.Adapter<NewLeDeviceRecyclerAdapt
         fun bindTo(item: BluetoothDevice) {
             itemView.text_device_name_ble.text = item.name ?: item.address
             itemView.btn_connect_ble.setOnClickListener {
-                MaterialAlertDialogBuilder(itemView.context).setMessage("디바이스를 연결할까요?").setPositiveButton("확인",
-                    { dialog, which ->
-                        dialog.dismiss()
-                    }).create().show()
+                Log.d("uuid", item.uuids?.toString() ?: "NULL")
+                MaterialAlertDialogBuilder(itemView.context).setMessage("디바이스를 연결할까요?").setPositiveButton("확인"
+                ) { dialog, which ->
+                    dialog.dismiss()
+                }.create().show()
             }
         }
     }
