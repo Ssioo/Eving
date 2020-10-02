@@ -9,6 +9,7 @@ import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.whoissio.eving.utils.Constants
 import com.whoissio.eving.utils.Constants.SP_TAG
+import com.whoissio.eving.utils.XAccessTokenInterceptor
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,6 +34,7 @@ class ApplicationClass: Application() {
                     }
                 }
             }))
+            .addNetworkInterceptor(XAccessTokenInterceptor())
             .build()
 
         val retrofit = Retrofit.Builder()

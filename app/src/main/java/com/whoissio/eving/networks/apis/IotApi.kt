@@ -1,6 +1,7 @@
-package com.whoissio.eving.networks
+package com.whoissio.eving.networks.apis
 
 import com.whoissio.eving.models.IotDevice
+import com.whoissio.eving.networks.BaseResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 

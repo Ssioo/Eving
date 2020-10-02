@@ -1,6 +1,8 @@
 package com.whoissio.eving.networks
 
 import androidx.lifecycle.MutableLiveData
+import com.orhanobut.logger.Logger
+import com.whoissio.eving.utils.SingleEvent
 
 class NetworkEvent: MutableLiveData<NetworkEvent.NetworkState>() {
 
@@ -12,7 +14,7 @@ class NetworkEvent: MutableLiveData<NetworkEvent.NetworkState>() {
         value = NetworkState.LOADING
     }
 
-    fun handleResponse2(response : BaseResponse<*>?) {
+    fun handleResponse(response : BaseResponse<*>?) {
         value = response?.let {
             if (it.code.toString().startsWith("4") || it.code.toString().startsWith("5")) NetworkState.SUCCESS
             else NetworkState.FAILURE

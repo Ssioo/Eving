@@ -91,4 +91,7 @@ dependencies {
 
     // https://github.com/orhanobut/logger
     implementation 'com.orhanobut:logger:2.2.0'
+
+    // https://github.com/Bigkoo/Android-PickerView
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
 }

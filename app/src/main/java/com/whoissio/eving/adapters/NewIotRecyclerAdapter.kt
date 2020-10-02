@@ -1,4 +1,4 @@
-package com.whoissio.eving.views
+package com.whoissio.eving.adapters
 
 import android.bluetooth.BluetoothDevice
 import android.util.Log

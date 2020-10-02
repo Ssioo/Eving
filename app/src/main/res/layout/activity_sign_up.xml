@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="com.whoissio.eving.models.UserGender" />
         <variable
             name="vm"
             type="com.whoissio.eving.viewmodels.SignUpViewModel" />
@@ -133,11 +134,11 @@
                     android:text="남자"
                     android:letterSpacing="0"
                     android:textSize="14sp"
-                    android:textColor="@{vm.gender == 1 ? @android:color/white : @color/colorTitle}"
-                    android:background="@{vm.gender == 1 ? @drawable/background_solid_colorprimary : @drawable/background_border_backlight}"
+                    android:textColor="@{vm.gender == UserGender.MALE ? 0xffffffff : 0xffc8c8c8}"
+                    android:background="@{vm.gender == UserGender.MALE ? @drawable/background_solid_colorprimary : @drawable/shape_border1_c8c8c8}"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="20dp"
-                    android:onClick="@{() -> vm.onClickGender(1)}"
+                    android:onClick="@{() -> vm.onClickGender(UserGender.MALE)}"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintTop_toBottomOf="@id/tv_gender"
                     app:layout_constraintBottom_toTopOf="@id/tv_birth"
@@ -154,10 +155,10 @@
                     android:text="여자"
                     android:letterSpacing="0"
                     android:textSize="14sp"
-                    android:textColor="@{vm.gender == 2 ? 0xffffffff : 0xff333333}"
-                    android:background="@{vm.gender == 2 ? @drawable/background_solid_colorprimary : @drawable/background_border_backlight}"
+                    android:textColor="@{vm.gender == UserGender.FEMALE ? 0xffffffff : 0xffc8c8c8}"
+                    android:background="@{vm.gender == UserGender.FEMALE ? @drawable/background_solid_colorprimary : @drawable/shape_border1_c8c8c8}"
                     android:layout_marginEnd="20dp"
-                    android:onClick="@{() -> vm.onClickGender(2)}"
+                    android:onClick="@{() -> vm.onClickGender(UserGender.FEMALE)}"
                     app:layout_constraintTop_toTopOf="@id/tv_gender_male"
                     app:layout_constraintBottom_toBottomOf="@id/tv_gender_male"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -214,7 +215,7 @@
             android:text="가입하기"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:letterSpacing="0dp"
+            android:letterSpacing="0"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp" />
 

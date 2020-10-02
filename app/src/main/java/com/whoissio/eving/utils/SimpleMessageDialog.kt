@@ -13,13 +13,12 @@ import com.whoissio.eving.R
 import kotlinx.android.synthetic.main.dialog_simple_message.*
 
 class SimpleMessageDialog(
-        context: Context,
-        val message: String? = "",
-        val btnText: String? = "",
-        val cancleable: Boolean = true,
-        val onClick: ((Dialog) -> Unit)? = null
-)
-    : Dialog(context) {
+    context: Context,
+    val message: String? = "",
+    val btnText: String? = "",
+    val cancleable: Boolean = true,
+    val onClick: ((Dialog) -> Unit)? = null
+) : Dialog(context) {
 
     init {
         setCancelable(cancleable)
@@ -38,7 +37,10 @@ class SimpleMessageDialog(
         window?.apply {
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             setGravity(Gravity.CENTER)
-            setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+            setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
         }
     }
 

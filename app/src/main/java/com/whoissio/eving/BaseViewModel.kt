@@ -6,7 +6,7 @@ import com.whoissio.eving.networks.NetworkEvent
 import com.whoissio.eving.utils.SingleEvent
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
-abstract class BaseViewModel: ViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
     protected val rxDisposable = CompositeDisposable()
 
@@ -17,5 +17,11 @@ abstract class BaseViewModel: ViewModel() {
     override fun onCleared() {
         super.onCleared()
         if (!rxDisposable.isDisposed) rxDisposable.dispose()
+    }
+
+    open fun doOnNetworkError(error: Throwable?) {
+        error?.printStackTrace()
+        networkEvent.value = NetworkEvent.NetworkState.ERROR
+        alertEvent.value = SingleEvent(data = R.string.network_error)
     }
 }

@@ -13,13 +13,13 @@ import com.whoissio.eving.R
 import kotlinx.android.synthetic.main.dialog_posneg.*
 
 class PosNegDialog(
-        context: Context,
-        val message: String = "",
-        val cancelable: Boolean = true,
-        val txtPos: String = context.getString(R.string.positive),
-        val txtNeg: String = context.getString(R.string.negative),
-        val onClick: ((Dialog, Int) -> Unit)? = null)
-    : Dialog(context) {
+    context: Context,
+    val message: String = "",
+    val cancelable: Boolean = true,
+    val txtPos: String = context.getString(R.string.positive),
+    val txtNeg: String = context.getString(R.string.negative),
+    val onClick: ((Dialog, Int) -> Unit)? = null
+) : Dialog(context) {
 
     init {
         setCancelable(cancelable)
@@ -47,7 +47,10 @@ class PosNegDialog(
         window?.apply {
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             setGravity(Gravity.CENTER)
-            setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+            setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
         }
     }
 
