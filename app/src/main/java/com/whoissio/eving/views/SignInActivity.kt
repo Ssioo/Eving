@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.whoissio.eving.BaseActivity
 import com.whoissio.eving.R
 import com.whoissio.eving.databinding.ActivitySignInBinding
+import com.whoissio.eving.utils.Constants
 import com.whoissio.eving.viewmodels.SignInViewModel
 
 class SignInActivity(override val layoutId: Int = R.layout.activity_sign_in) :
@@ -30,7 +31,7 @@ class SignInActivity(override val layoutId: Int = R.layout.activity_sign_in) :
 
         viewmodel.moveTo.observe(this, {
             it.get()?.let {
-                if (it == 1) {
+                if (it == Constants.ACTIVITY_MAIN) {
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }

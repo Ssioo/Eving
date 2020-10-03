@@ -14,9 +14,10 @@ import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class ApplicationClass: Application() {
+class ApplicationClass : Application() {
 
     companion object {
 
@@ -33,7 +34,9 @@ class ApplicationClass: Application() {
                         Log.i("OKHTTP", message)
                     }
                 }
-            }))
+            }).apply {
+                setLevel(HttpLoggingInterceptor.Level.BODY)
+            })
             .addNetworkInterceptor(XAccessTokenInterceptor())
             .build()
 
@@ -41,6 +44,7 @@ class ApplicationClass: Application() {
             .baseUrl(Constants.BASE_URL)
             .client(httpClient)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
@@ -50,9 +54,10 @@ class ApplicationClass: Application() {
 
         Logger.addLogAdapter(object : AndroidLogAdapter(
             PrettyFormatStrategy.newBuilder()
-            .showThreadInfo(false)
-            .methodCount(0)
-            .build()) {
+                .showThreadInfo(false)
+                .methodCount(0)
+                .build()
+        ) {
             override fun isLoggable(priority: Int, tag: String?): Boolean = BuildConfig.DEBUG
         })
     }

@@ -1,6 +1,7 @@
 package com.whoissio.eving.viewmodels
 
 import androidx.lifecycle.MutableLiveData
+import com.orhanobut.logger.Logger
 import com.whoissio.eving.ApplicationClass
 import com.whoissio.eving.BaseViewModel
 import com.whoissio.eving.R
@@ -15,7 +16,7 @@ class SignInViewModel : BaseViewModel() {
 
     val email: MutableLiveData<String> = MutableLiveData("")
     val pw: MutableLiveData<String> = MutableLiveData("")
-    val moveTo: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
+    val moveTo: MutableLiveData<SingleEvent<String>> = MutableLiveData()
 
     fun onClickSignIn() {
         if (!email.value.isValidEmail() || !pw.value.isValidPw()) {
@@ -37,7 +38,7 @@ class SignInViewModel : BaseViewModel() {
                 toastEvent.value = SingleEvent(data = R.string.sign_in_success)
                 ApplicationClass.sSharedPreferences.edit()
                     .putString(Constants.X_ACCESS_TOKEN, it.data.token).apply()
-                moveTo.value = SingleEvent(1)
+                moveTo.value = SingleEvent(Constants.ACTIVITY_MAIN)
             }, {
                 doOnNetworkError(it)
             })

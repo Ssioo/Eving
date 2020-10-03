@@ -25,4 +25,11 @@ class UserService {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun tryVerifyToken(): Single<BaseResponse<Any>> {
+        return ApplicationClass.retrofit.create(UserApi::class.java)
+            .verifyToken()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }

@@ -6,6 +6,7 @@ import com.whoissio.eving.models.UserTokenIssueParam
 import com.whoissio.eving.networks.BaseResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 

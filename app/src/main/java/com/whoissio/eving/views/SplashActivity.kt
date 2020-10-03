@@ -2,11 +2,11 @@ package com.whoissio.eving.views
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.lifecycle.ViewModelProvider
 import com.whoissio.eving.BaseActivity
 import com.whoissio.eving.R
 import com.whoissio.eving.databinding.ActivitySplashBinding
+import com.whoissio.eving.utils.Constants
 import com.whoissio.eving.viewmodels.SplashViewModel
 
 class SplashActivity(override val layoutId: Int = R.layout.activity_splash) :
@@ -16,9 +16,19 @@ class SplashActivity(override val layoutId: Int = R.layout.activity_splash) :
         ViewModelProvider(this).get(SplashViewModel::class.java)
 
     override fun initView(savedInstanceState: Bundle?) {
-        Handler().postDelayed(Runnable {
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
-        }, 1000)
+        viewmodel.tryAutoSignIn()
+
+        viewmodel.moveTo.observe(this, {
+            it.get()?.let {
+                startActivity(
+                    Intent(
+                        this, when (it) {
+                            Constants.ACTIVITY_MAIN -> MainActivity::class.java
+                            else -> SignInActivity::class.java
+                        }
+                    )
+                )
+            }
+        })
     }
 }

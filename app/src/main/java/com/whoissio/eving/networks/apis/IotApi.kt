@@ -6,12 +6,12 @@ import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 
 interface IotApi {
-    @GET("/eving/devices")
-    fun getAllDevices(): Single<BaseResponse<Any>>
+    @GET("/eving/iot/devices")
+    fun getAllDevices(): Single<BaseResponse<ArrayList<IotDevice>>>
 
-    @POST("/eving/devices")
-    fun registerDevice(@Body param: Any): Single<BaseResponse<IotDevice>>
+    @POST("/eving/iot/devices")
+    fun registerDevice(@Body param: Any): Single<BaseResponse<Any>>
 
-    @DELETE("/eving/devices/{deviceId}")
-    fun registerDevice(@Path("deviceId") deviceId: Int): Single<BaseResponse<Any>>
+    @DELETE("/eving/iot/devices/{deviceId}")
+    fun deleteDevice(@Path("deviceId") deviceId: Int): Single<BaseResponse<Any>>
 }
