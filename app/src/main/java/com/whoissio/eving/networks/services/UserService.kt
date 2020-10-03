@@ -12,21 +12,21 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class UserService {
-    fun tryRegister(email: String, pwd: String, gender: UserGender, birth: String): Single<BaseResponse<Any>> {
+    fun register(email: String, pwd: String, gender: UserGender, birth: String): Single<BaseResponse<Any>> {
         return ApplicationClass.retrofit.create(UserApi::class.java)
             .registerUser(UserRegisterParam(email, pwd, birth, gender))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun trySignIn(email: String, pwd: String): Single<BaseResponse<Jwt>> {
+    fun signIn(email: String, pwd: String): Single<BaseResponse<Jwt>> {
         return ApplicationClass.retrofit.create(UserApi::class.java)
             .issueToken(UserTokenIssueParam(email, pwd))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun tryVerifyToken(): Single<BaseResponse<Any>> {
+    fun verifyToken(): Single<BaseResponse<Any>> {
         return ApplicationClass.retrofit.create(UserApi::class.java)
             .verifyToken()
             .subscribeOn(Schedulers.io())

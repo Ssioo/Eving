@@ -19,11 +19,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.whoissio.eving.BaseFragment
 import com.whoissio.eving.R
 import com.whoissio.eving.databinding.FragmentBleDevicesBinding
-import com.whoissio.eving.viewmodels.IotFragmentViewModel
+import com.whoissio.eving.viewmodels.IotViewModel
 import kotlinx.android.synthetic.main.fragment_ble_devices.*
 
 class IotFragment(override val layoutId: Int = R.layout.fragment_ble_devices)
-    : BaseFragment<FragmentBleDevicesBinding, IotFragmentViewModel>(layoutId) {
+    : BaseFragment<FragmentBleDevicesBinding, IotViewModel>(layoutId) {
     companion object {
         const val REQUEST_ENABLE_BT = 100
         const val REQUEST_FINE_LOCATION = 101
@@ -41,8 +41,8 @@ class IotFragment(override val layoutId: Int = R.layout.fragment_ble_devices)
         }
     }
 
-    override fun getViewModel(): IotFragmentViewModel {
-        return ViewModelProvider(this).get(IotFragmentViewModel::class.java)
+    override fun getViewModel(): IotViewModel {
+        return ViewModelProvider(this).get(IotViewModel::class.java)
     }
 
     override fun initView(savedInstanceState: Bundle?) {

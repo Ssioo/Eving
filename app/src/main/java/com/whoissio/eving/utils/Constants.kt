@@ -11,4 +11,8 @@ object Constants {
     const val ACTIVITY_SIGN_UP = "SIGN_UP"
     const val ACTIVITY_MAIN = "MAIN"
     const val ACTIVITY_IOT = "IOT"
+
+    const val FRAGMENT_CONTENTS = "CONTENTS"
+    const val FRAGMENT_SEARCH = "SEARCH"
+    const val FRAGMENT_MYPAGE = "MYPAGE"
 }

@@ -1,7 +1,6 @@
 package com.whoissio.eving.viewmodels
 
 import androidx.lifecycle.MutableLiveData
-import com.orhanobut.logger.Logger
 import com.whoissio.eving.ApplicationClass
 import com.whoissio.eving.BaseViewModel
 import com.whoissio.eving.R
@@ -28,7 +27,7 @@ class SignInViewModel : BaseViewModel() {
 
     fun trySignIn(email: String, pw: String) {
         networkEvent.startLoading()
-        UserService().trySignIn(email, pw)
+        UserService().signIn(email, pw)
             .toDisposal(rxDisposable, {
                 networkEvent.handleResponse(it)
                 if (it.code != 200 || it.data == null) {

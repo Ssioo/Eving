@@ -28,7 +28,7 @@ class SignUpViewModel : BaseViewModel() {
             return
         }
         networkEvent.startLoading()
-        UserService().tryRegister(email.value!!, pw.value!!, gender.value!!, birth.value!!)
+        UserService().register(email.value!!, pw.value!!, gender.value!!, birth.value!!)
             .toDisposal(rxDisposable, {
                 networkEvent.handleResponse(it)
                 it?.let {

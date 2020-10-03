@@ -2,7 +2,6 @@ package com.whoissio.eving
 
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.LayoutRes
@@ -10,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.whoissio.eving.networks.NetworkEvent
-import com.whoissio.eving.utils.SimpleMessageDialog
+import com.whoissio.eving.utils.components.SimpleMessageDialog
 
 abstract class BaseActivity<B: ViewDataBinding, VM: BaseViewModel>: AppCompatActivity(), BaseActivityView<VM> {
 

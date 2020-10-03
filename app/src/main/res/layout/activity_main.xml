@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View" />
+        <import type="com.whoissio.eving.utils.Constants" />
+        <variable
+            name="vm"
+            type="com.whoissio.eving.viewmodels.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,11 +25,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <fragment
-            android:id="@+id/fg_main"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fg_content"
+            android:name="com.whoissio.eving.views.ContentsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{vm.visibleFragment == Constants.FRAGMENT_CONTENTS ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@id/bnv_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_main" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fg_search"
             android:name="com.whoissio.eving.views.IotFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="@{vm.visibleFragment == Constants.FRAGMENT_SEARCH ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@id/bnv_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_main" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fg_mypage"
+            android:name="com.whoissio.eving.views.IotFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{vm.visibleFragment == Constants.FRAGMENT_MYPAGE ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@id/bnv_main"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,4 +1,4 @@
-package com.whoissio.eving.utils
+package com.whoissio.eving.utils.components
 
 import android.app.Dialog
 import android.content.Context

@@ -2,19 +2,15 @@ package com.whoissio.eving
 
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.whoissio.eving.networks.NetworkEvent
-import com.whoissio.eving.utils.SimpleMessageDialog
+import com.whoissio.eving.utils.components.SimpleMessageDialog
 
 abstract class BaseFragment<B: ViewDataBinding, VM: BaseViewModel>(@LayoutRes override val layoutId: Int): Fragment(layoutId), BaseFragmentView<VM> {
 

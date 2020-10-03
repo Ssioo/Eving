@@ -12,7 +12,7 @@ class SplashViewModel : BaseViewModel() {
     val moveTo: MutableLiveData<SingleEvent<String>> = MutableLiveData()
 
     fun tryAutoSignIn() {
-        UserService().tryVerifyToken().toDisposal(rxDisposable, {
+        UserService().verifyToken().toDisposal(rxDisposable, {
             it?.let {
                 moveTo.value =
                     SingleEvent(data = if (it.code == 200) Constants.ACTIVITY_MAIN else Constants.ACTIVITY_SIGN_IN)

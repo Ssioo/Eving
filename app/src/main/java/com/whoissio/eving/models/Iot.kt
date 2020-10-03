@@ -1,5 +1,7 @@
 package com.whoissio.eving.models
 
+import com.google.gson.annotations.SerializedName
+
 enum class IotType(val type: String) {
     CUSTOM("custom"),
     WATCH("watch"),
@@ -7,9 +9,17 @@ enum class IotType(val type: String) {
 }
 
 data class IotDevice(
-    val uuid: String?,
-    val name: String?,
-    val address: String,
-    val type: IotType,
-    val createdAt: String
+    @SerializedName("id") val id: Int,
+    @SerializedName("uuid") val uuid: String?,
+    @SerializedName("name") val name: String?,
+    @SerializedName("address") val address: String,
+    @SerializedName("type") val type: IotType,
+    @SerializedName("created_at") val createdAt: String
+)
+
+data class IotRegisterParam(
+    @SerializedName("uuid") val uuid: String?,
+    @SerializedName("name") val name: String?,
+    @SerializedName("address") val address: String,
+    @SerializedName("type") val type: IotType,
 )

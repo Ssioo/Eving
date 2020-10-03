@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.whoissio.eving.viewmodels.IotFragmentViewModel" />
+            type="com.whoissio.eving.viewmodels.IotViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
