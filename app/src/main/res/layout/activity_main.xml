@@ -37,19 +37,8 @@
             app:layout_constraintTop_toBottomOf="@id/tb_main" />
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fg_search"
-            android:name="com.whoissio.eving.views.IotFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:visibility="@{vm.visibleFragment == Constants.FRAGMENT_SEARCH ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toTopOf="@id/bnv_main"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tb_main" />
-
-        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fg_mypage"
-            android:name="com.whoissio.eving.views.IotFragment"
+            android:name="com.whoissio.eving.views.MyPageFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:visibility="@{vm.visibleFragment == Constants.FRAGMENT_MYPAGE ? View.VISIBLE : View.GONE}"
@@ -63,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             app:menu="@menu/menu_bnv"
+            app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

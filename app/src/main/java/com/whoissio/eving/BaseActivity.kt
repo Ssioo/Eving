@@ -11,7 +11,7 @@ import androidx.databinding.ViewDataBinding
 import com.whoissio.eving.networks.NetworkEvent
 import com.whoissio.eving.utils.components.SimpleMessageDialog
 
-abstract class BaseActivity<B: ViewDataBinding, VM: BaseViewModel>: AppCompatActivity(), BaseActivityView<VM> {
+abstract class BaseActivity<B: ViewDataBinding, VM: BaseViewModel>(@LayoutRes override val layoutId: Int): AppCompatActivity(), BaseActivityView<VM> {
 
     protected var binding : B? = null
     protected lateinit var viewmodel : VM

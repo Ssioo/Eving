@@ -8,7 +8,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.whoissio.eving.BaseViewModel
 
-abstract class BaseRecyclerAdapter<I, VM : BaseViewModel, B : ViewDataBinding>(protected var viewmodel : VM) :
+abstract class BaseRecyclerAdapter<I, VM : BaseViewModel, B : ViewDataBinding>(
+    protected var viewmodel: VM,
+    @LayoutRes override val layoutId: Int
+) :
     RecyclerView.Adapter<BaseViewHolder<I, B>>(),
     BaseRecyclerAdapterInterface<I> {
 
@@ -39,5 +42,5 @@ interface BaseRecyclerAdapterInterface<I> {
     @get:LayoutRes
     val layoutId: Int
 
-    fun setItem(items : ArrayList<I>)
+    fun setItem(items: ArrayList<I>)
 }

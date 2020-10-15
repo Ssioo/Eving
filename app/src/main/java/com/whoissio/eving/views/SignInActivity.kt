@@ -9,8 +9,8 @@ import com.whoissio.eving.databinding.ActivitySignInBinding
 import com.whoissio.eving.utils.Constants
 import com.whoissio.eving.viewmodels.SignInViewModel
 
-class SignInActivity(override val layoutId: Int = R.layout.activity_sign_in) :
-    BaseActivity<ActivitySignInBinding, SignInViewModel>() {
+class SignInActivity:
+    BaseActivity<ActivitySignInBinding, SignInViewModel>(R.layout.activity_sign_in) {
 
     override fun getViewModel(): SignInViewModel =
         ViewModelProvider(this).get(SignInViewModel::class.java)

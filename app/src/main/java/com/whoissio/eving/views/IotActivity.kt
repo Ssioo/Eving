@@ -5,25 +5,25 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
-import android.content.Context.BLUETOOTH_SERVICE
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.whoissio.eving.BaseFragment
+import com.whoissio.eving.BaseActivity
 import com.whoissio.eving.R
-import com.whoissio.eving.databinding.FragmentBleDevicesBinding
+import com.whoissio.eving.databinding.ActivityIotsBinding
+import com.whoissio.eving.networks.services.IotService
 import com.whoissio.eving.viewmodels.IotViewModel
-import kotlinx.android.synthetic.main.fragment_ble_devices.*
+import kotlinx.android.synthetic.main.activity_iots.*
 
-class IotFragment(override val layoutId: Int = R.layout.fragment_ble_devices)
-    : BaseFragment<FragmentBleDevicesBinding, IotViewModel>(layoutId) {
+class IotActivity
+    : BaseActivity<ActivityIotsBinding, IotViewModel>(R.layout.activity_iots) {
     companion object {
         const val REQUEST_ENABLE_BT = 100
         const val REQUEST_FINE_LOCATION = 101
@@ -49,9 +49,12 @@ class IotFragment(override val layoutId: Int = R.layout.fragment_ble_devices)
         rv_bles.adapter = viewmodel.newIotRecyclerAdapter
         rv_my_bles.adapter = viewmodel.myIotAdapter
         btn_edit_bles.setOnClickListener {
-            MaterialAlertDialogBuilder(activity!!)
+            MaterialAlertDialogBuilder(this)
                 .setMessage("디바이스를 편집할까요?")
                 .setPositiveButton("확인", { dialog, which ->
+                    if (which == DialogInterface.BUTTON_POSITIVE) {
+
+                    }
                     dialog.dismiss()
                 })
                 .create()
@@ -59,9 +62,9 @@ class IotFragment(override val layoutId: Int = R.layout.fragment_ble_devices)
         }
         btn_find_ble.setOnClickListener { scanLeDevice() }
 
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
-                requireActivity(),
+                this,
                 arrayOf(
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -76,7 +79,7 @@ class IotFragment(override val layoutId: Int = R.layout.fragment_ble_devices)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_ENABLE_BT && resultCode == AppCompatActivity.RESULT_OK) {
+        if (requestCode == REQUEST_ENABLE_BT && resultCode == RESULT_OK) {
             scanLeDevice()
         }
     }
@@ -93,7 +96,7 @@ class IotFragment(override val layoutId: Int = R.layout.fragment_ble_devices)
     }
 
     private fun tryScanIotDevices() {
-        val bluetoothManager = context?.getSystemService(BLUETOOTH_SERVICE) as BluetoothManager?
+        val bluetoothManager = getSystemService(BLUETOOTH_SERVICE) as BluetoothManager?
         val bluetoothAdapter = bluetoothManager?.adapter
         if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)

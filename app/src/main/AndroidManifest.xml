@@ -32,6 +32,10 @@
         <activity
             android:name=".views.SignUpActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".views.IotActivity" />
+        <activity android:name=".views.ExerciseActivity" />
+
+        <service android:name=".utils.BleGattService" />
     </application>
 
 </manifest>

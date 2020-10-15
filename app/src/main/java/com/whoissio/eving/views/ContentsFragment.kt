@@ -2,6 +2,7 @@ package com.whoissio.eving.views
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.whoissio.eving.BaseFragment
 import com.whoissio.eving.R
 import com.whoissio.eving.databinding.FragmentContentsBinding
@@ -12,6 +13,6 @@ class ContentsFragment : BaseFragment<FragmentContentsBinding, ContentsViewModel
         ViewModelProvider(this).get(ContentsViewModel::class.java)
 
     override fun initView(savedInstanceState: Bundle?) {
-        binding?.rvContents?.adapter = viewmodel.contentsRecyclerAdapter
+        binding?.rvContents?.adapter = viewmodel.adsAndContentsAdapter
     }
 }

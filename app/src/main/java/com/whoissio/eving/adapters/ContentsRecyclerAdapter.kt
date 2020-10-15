@@ -9,10 +9,8 @@ import com.whoissio.eving.models.Contents
 import com.whoissio.eving.utils.Helpers.toPx
 import com.whoissio.eving.viewmodels.ContentsViewModel
 
-class ContentsRecyclerAdapter(
-    override val layoutId: Int = R.layout.item_contents,
-    viewModel: ContentsViewModel
-) : BaseRecyclerAdapter<Contents, ContentsViewModel, ItemContentsBinding>(viewModel) {
+class ContentsRecyclerAdapter(viewModel: ContentsViewModel)
+    : BaseRecyclerAdapter<Contents, ContentsViewModel, ItemContentsBinding>(viewModel, R.layout.item_contents) {
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)

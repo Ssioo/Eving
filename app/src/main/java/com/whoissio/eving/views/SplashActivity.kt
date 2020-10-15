@@ -9,8 +9,8 @@ import com.whoissio.eving.databinding.ActivitySplashBinding
 import com.whoissio.eving.utils.Constants
 import com.whoissio.eving.viewmodels.SplashViewModel
 
-class SplashActivity(override val layoutId: Int = R.layout.activity_splash) :
-    BaseActivity<ActivitySplashBinding, SplashViewModel>() {
+class SplashActivity :
+    BaseActivity<ActivitySplashBinding, SplashViewModel>(R.layout.activity_splash) {
 
     override fun getViewModel(): SplashViewModel =
         ViewModelProvider(this).get(SplashViewModel::class.java)
