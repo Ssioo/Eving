@@ -1,15 +1,9 @@
 package com.whoissio.eving.networks.apis
 
-import com.whoissio.eving.models.Exercise
-import com.whoissio.eving.models.ExerciseId
-import com.whoissio.eving.models.ExerciseSensorDataParam
-import com.whoissio.eving.models.SensorData
+import com.whoissio.eving.models.*
 import com.whoissio.eving.networks.BaseResponse
 import io.reactivex.rxjava3.core.Single
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ExerciseApi {
     @POST("/eving/exercises/data/{exerciseId}")
@@ -23,4 +17,10 @@ interface ExerciseApi {
 
     @GET("/eving/exercises/data/{exerciseId}")
     fun getExerciseSensorData(@Path("exerciseId") exerciseId: Int): Single<BaseResponse<ArrayList<SensorData?>>>
+
+    @DELETE("/eving/exercises/{exerciseId}")
+    fun deleteExercise(@Path("exerciseId") exerciseId: Int): Single<BaseResponse<Any>>
+
+    @PUT("/eving/exercises/title/{exerciseId}")
+    fun setTitleOfExercise(@Path("exerciseId") exerciseId: Int, @Body title: ExerciseTitle): Single<BaseResponse<Any>>
 }

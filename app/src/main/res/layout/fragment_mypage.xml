@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -24,14 +25,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/iv_background_header"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:background="#EFF1F5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_background_mypage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_background_mypage"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:scaleType="centerCrop"
+                        android:foreground="#44000000"/>
+
+                    <TextView
+                        android:id="@+id/tv_username_mypage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:text="UserName"
+                        android:textStyle="bold"
+                        android:text="@{pvm.email ?? `UnKnown`}"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="18sp"
+                        android:textColor="#FFF"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_username_mypage"
+                        android:textStyle="bold"
+                        android:text="님 반갑습니다."
+                        android:layout_marginStart="4dp"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="18sp"
+                        android:textColor="#FFF" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/tv_activity_status"
@@ -287,6 +325,14 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginHorizontal="20dp"
                     android:background="#EFEFEF" />
+
+                <View
+                    android:id="@+id/flex_box"
+                    app:layout_constraintTop_toBottomOf="@id/separator9"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

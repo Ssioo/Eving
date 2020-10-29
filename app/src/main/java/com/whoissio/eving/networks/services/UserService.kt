@@ -1,10 +1,7 @@
 package com.whoissio.eving.networks.services
 
 import com.whoissio.eving.ApplicationClass
-import com.whoissio.eving.models.Jwt
-import com.whoissio.eving.models.UserGender
-import com.whoissio.eving.models.UserRegisterParam
-import com.whoissio.eving.models.UserTokenIssueParam
+import com.whoissio.eving.models.*
 import com.whoissio.eving.networks.BaseResponse
 import com.whoissio.eving.networks.apis.UserApi
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -36,6 +33,13 @@ class UserService {
     fun resign(): Single<BaseResponse<Any>> {
         return ApplicationClass.retrofit.create(UserApi::class.java)
             .resign()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getProfile(): Single<BaseResponse<User>> {
+        return ApplicationClass.retrofit.create(UserApi::class.java)
+            .getProfile()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

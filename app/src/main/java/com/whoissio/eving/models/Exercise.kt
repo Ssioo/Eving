@@ -13,6 +13,10 @@ data class ExerciseId(
     @SerializedName("exerciseId") val exerciseId: Int
 )
 
+data class ExerciseTitle(
+    @SerializedName("title") val exerciseTitle: String
+)
+
 data class Exercise(
     @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String?,

@@ -11,10 +11,12 @@ import com.whoissio.eving.networks.services.ExerciseService
 import com.whoissio.eving.networks.services.IotService
 import com.whoissio.eving.utils.Helpers.toDisposal
 import com.whoissio.eving.utils.objects.SingleEvent
+import io.reactivex.rxjava3.core.Single
 
 class ExerciseViewModel : BaseViewModel() {
 
     var exerciseId: Int = -1
+    val newTitle: MutableLiveData<String> = MutableLiveData("")
 
     val totalSet: MutableLiveData<Int> = MutableLiveData(1)
     val fullAccSensorData: ArrayList<List<Sensor>> = ArrayList()
@@ -38,10 +40,12 @@ class ExerciseViewModel : BaseViewModel() {
                     .plus(fullTiltSensorData[idx][idx2].data)
                     .plus(fullMagSensorData[idx][idx2].data)
             }}
-        ExerciseService()
-            .registerExercise(exerciseId, sensors, avgAcc, avgGyro , avgTilt)
+        Single.zip(
+            ExerciseService().registerExercise(exerciseId, sensors, avgAcc, avgGyro , avgTilt),
+            ExerciseService().setExerciseTitle(newTitle.value!!, exerciseId)
+        ) { a, b -> listOf(a, b) }
             .toDisposal(rxDisposable, {
-                networkEvent.handleResponse(it)
+                networkEvent.handleResponse(it[0])
                 toastEvent.value = SingleEvent(data = R.string.exercise_upload_success)
                 canFinish.value  = SingleEvent(data = true)
             }, {

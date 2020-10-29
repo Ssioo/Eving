@@ -1,6 +1,7 @@
 package com.whoissio.eving.networks.apis
 
 import com.whoissio.eving.models.Jwt
+import com.whoissio.eving.models.User
 import com.whoissio.eving.models.UserRegisterParam
 import com.whoissio.eving.models.UserTokenIssueParam
 import com.whoissio.eving.networks.BaseResponse
@@ -22,4 +23,7 @@ interface UserApi {
 
     @DELETE("/eving/users")
     fun resign(): Single<BaseResponse<Any>>
+
+    @GET("/eving/users/info")
+    fun getProfile(): Single<BaseResponse<User>>
 }
