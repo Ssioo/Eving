@@ -6,11 +6,13 @@ import android.util.TypedValue
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.LineData
-import com.whoissio.eving.networks.BaseResponse
+import com.whoissio.eving.utils.Constants.DATETIME_FORMAT
+import com.whoissio.eving.utils.Constants.DATETIME_FORMAT_SIMPLE
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.functions.Consumer
-import kotlin.math.floor
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Helpers {
     fun <T> Single<T>.toDisposal(
@@ -64,5 +66,13 @@ object Helpers {
     fun toHourMin(src: Int?): String {
         if (src == null) return ""
         return String.format("%02d:%02d", src.div(60), src % 60)
+    }
+
+    @JvmStatic
+    fun toSimpleDate(src: String?): String {
+        if (src == null) return ""
+        return DATETIME_FORMAT.parse(src)
+            ?.let { DATETIME_FORMAT_SIMPLE.format(it) }
+            ?: "----.--.-- --:--"
     }
 }

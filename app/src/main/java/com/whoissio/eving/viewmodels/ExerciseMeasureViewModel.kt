@@ -6,15 +6,14 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.orhanobut.logger.Logger
 import com.whoissio.eving.BaseViewModel
 import com.whoissio.eving.R
 import com.whoissio.eving.models.Sensor
 import com.whoissio.eving.networks.services.IotService
+import com.whoissio.eving.utils.Constants.ALL_SENSORTYPES
 import com.whoissio.eving.utils.Helpers.toDisposal
 import com.whoissio.eving.utils.SensorType
 import com.whoissio.eving.utils.objects.SingleEvent
-import java.lang.Exception
 
 class ExerciseMeasureViewModel : BaseViewModel() {
 
@@ -36,15 +35,7 @@ class ExerciseMeasureViewModel : BaseViewModel() {
     val refreshChart: MutableLiveData<SingleEvent<Boolean>> = MutableLiveData()
 
     var chartData = LineData(ArrayList<ILineDataSet>().apply {
-        listOf(
-            SensorType.ACC_X,
-            SensorType.ACC_Y,
-            SensorType.ACC_Z,
-            SensorType.GYRO_X,
-            SensorType.GYRO_Y,
-            SensorType.GYRO_Z,
-            SensorType.TILT,
-        ).forEach {
+        ALL_SENSORTYPES.forEach {
             add(
                 LineDataSet(
                     ArrayList<Entry>().apply { add(Entry(0f, 0f)) },
@@ -52,7 +43,8 @@ class ExerciseMeasureViewModel : BaseViewModel() {
                 ).apply {
                     colors = listOf(it.color)
                     circleColors = listOf(it.color)
-                    axisDependency = if(it.type == 0) YAxis.AxisDependency.LEFT else YAxis.AxisDependency.RIGHT
+                    axisDependency =
+                        if (it.type == 0) YAxis.AxisDependency.LEFT else YAxis.AxisDependency.RIGHT
                     mode = LineDataSet.Mode.CUBIC_BEZIER
                 })
         }
@@ -77,15 +69,7 @@ class ExerciseMeasureViewModel : BaseViewModel() {
 
     fun setNewChart() {
         chartData = LineData(ArrayList<ILineDataSet>().apply {
-            listOf(
-                SensorType.ACC_X,
-                SensorType.ACC_Y,
-                SensorType.ACC_Z,
-                SensorType.GYRO_X,
-                SensorType.GYRO_Y,
-                SensorType.GYRO_Z,
-                SensorType.TILT,
-            ).forEach {
+            ALL_SENSORTYPES.forEach {
                 add(
                     LineDataSet(
                         ArrayList<Entry>().apply { add(Entry(0f, 0f)) },
@@ -93,7 +77,8 @@ class ExerciseMeasureViewModel : BaseViewModel() {
                     ).apply {
                         colors = listOf(it.color)
                         circleColors = listOf(it.color)
-                        axisDependency = if(it.type == 0) YAxis.AxisDependency.LEFT else YAxis.AxisDependency.RIGHT
+                        axisDependency =
+                            if (it.type == 0) YAxis.AxisDependency.LEFT else YAxis.AxisDependency.RIGHT
                         mode = LineDataSet.Mode.CUBIC_BEZIER
                     })
             }

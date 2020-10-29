@@ -36,9 +36,9 @@ class ExerciseViewModel : BaseViewModel() {
         val sensors = fullAccSensorData.mapIndexed { idx, item ->
             item.mapIndexed { idx2, item2 ->
                 item2.data
-                    .plus(fullGyroSensorData[idx][idx2].data)
-                    .plus(fullTiltSensorData[idx][idx2].data)
-                    .plus(fullMagSensorData[idx][idx2].data)
+                    .plus(fullGyroSensorData.getOrNull(idx)?.getOrNull(idx2)?.data ?: listOf(0f, 0f, 0f))
+                    .plus(fullTiltSensorData.getOrNull(idx)?.getOrNull(idx2)?.data ?: listOf(0f))
+                    .plus(fullMagSensorData.getOrNull(idx)?.getOrNull(idx2)?.data ?: listOf(0f, 0f, 0f))
             }}
         Single.zip(
             ExerciseService().registerExercise(exerciseId, sensors, avgAcc, avgGyro , avgTilt),

@@ -1,6 +1,7 @@
 package com.whoissio.eving.utils
 
 import android.graphics.Color
+import java.text.SimpleDateFormat
 import java.util.*
 
 object Constants {
@@ -27,8 +28,21 @@ object Constants {
         "com.whoissio.eving.ACTION_GATT_SERVICES_DISCOVERED"
     const val ACTION_DATA_AVAILABLE = "com.whoissio.eving.ACTION_DATA_AVAILABLE"
     const val EXTRA_DATA = "com.example.bluetooth.le.EXTRA_DATA"
-    val UUID_DEVICE = UUID.fromString("00002a00-0000-1000-8000-00805f9b34fb")
+
     val UUID_DEVICE2 = UUID.fromString("0000FFE1-0000-1000-8000-00805f9b34fb")
 
     val COLOR_SET = listOf(Color.WHITE, Color.GRAY, Color.YELLOW, Color.RED, Color.LTGRAY)
+
+    val ALL_SENSORTYPES = listOf(
+        SensorType.ACC_X,
+        SensorType.ACC_Y,
+        SensorType.ACC_Z,
+        SensorType.GYRO_X,
+        SensorType.GYRO_Y,
+        SensorType.GYRO_Z,
+        SensorType.TILT
+    )
+
+    val DATETIME_FORMAT: SimpleDateFormat = SimpleDateFormat("YYYY-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA)
+    val DATETIME_FORMAT_SIMPLE = SimpleDateFormat("YYYY.MM.dd HH:mm", Locale.KOREA)
 }

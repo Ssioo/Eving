@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.whoissio.eving.utils.Helpers" />
         <variable
             name="item"
             type="com.whoissio.eving.models.Exercise" />
@@ -42,7 +43,7 @@
             android:id="@+id/created_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.createdAt}"
+            android:text="@{Helpers.toSimpleDate(item.createdAt)}"
             tools:text="2020.02.23 12:12"
             android:textColor="#c8c8c8"
             android:textSize="10sp"
