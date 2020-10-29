@@ -1,7 +1,9 @@
 package com.whoissio.eving.views
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -26,6 +28,20 @@ class ExerciseActivity :
 
     override fun initView(savedInstanceState: Bundle?) {
 
+        setSupportActionBar(binding?.tbExercise)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_back_white)
+            setDisplayShowTitleEnabled(false)
+        }
+
         viewmodel.canFinish.observe(this) { it.get()?.let { if (it) finish() }}
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            if (!findNavController(R.id.nav_exercise).popBackStack()) finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

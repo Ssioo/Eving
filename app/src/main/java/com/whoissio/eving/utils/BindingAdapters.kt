@@ -13,5 +13,6 @@ object BindingAdapters {
             .load(url)
             .thumbnail(0.1f)
             .into(view)
+        view.clipToOutline = true
     }
 }
