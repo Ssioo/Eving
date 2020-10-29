@@ -32,4 +32,11 @@ class UserService {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun resign(): Single<BaseResponse<Any>> {
+        return ApplicationClass.retrofit.create(UserApi::class.java)
+            .resign()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }

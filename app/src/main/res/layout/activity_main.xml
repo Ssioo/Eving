@@ -23,7 +23,15 @@
             android:background="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_logo"
+                app:tint="#FFF"
+                android:layout_gravity="center" />
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fg_content"

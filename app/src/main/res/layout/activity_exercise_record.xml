@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.whoissio.eving.viewmodels.ExerciseRecordViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/tb_exercise_record"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:layout_gravity="center"
+                android:text="나의 운동 기록"
+                android:textSize="16sp"
+                />
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/tv_title1_records"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="기록한 운동이 총"
+            android:textColor="#101010"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_exercise_record"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_records_cnt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="0"
+            android:text="@{String.valueOf(vm.exercises.size())}"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_title1_records"
+            app:layout_constraintTop_toTopOf="@id/tv_title1_records"
+            android:layout_marginStart="6dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_title2_records"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="개 있습니다."
+            android:textColor="#101010"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_records_cnt"
+            app:layout_constraintTop_toTopOf="@id/tv_title1_records"
+            android:layout_marginStart="2dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_this_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이번달"
+            android:textSize="12sp"
+            android:textColor="#101010"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title1_records"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp" />
+
+        <!--<com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sort"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="최신순"
+            android:text="@{vm.sort == true ? `최신순` : `과거순`}"
+            android:onClick="@{() -> vm.toggleSort()}"
+            android:textColor="#c8c8c8"
+            android:letterSpacing="0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_exercise_record"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:minHeight="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:paddingHorizontal="12dp" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_exercise_records"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingHorizontal="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_this_month"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_exercise_record"
+            tools:itemCount="4"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -6,7 +6,7 @@ import com.whoissio.eving.R
 import com.whoissio.eving.models.UserGender
 import com.whoissio.eving.networks.services.UserService
 import com.whoissio.eving.utils.Helpers.toDisposal
-import com.whoissio.eving.utils.SingleEvent
+import com.whoissio.eving.utils.objects.SingleEvent
 import com.whoissio.eving.utils.Validators.isValidBirth
 import com.whoissio.eving.utils.Validators.isValidEmail
 import com.whoissio.eving.utils.Validators.isValidPw

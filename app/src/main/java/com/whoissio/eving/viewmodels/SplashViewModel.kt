@@ -5,7 +5,7 @@ import com.whoissio.eving.BaseViewModel
 import com.whoissio.eving.networks.services.UserService
 import com.whoissio.eving.utils.Constants
 import com.whoissio.eving.utils.Helpers.toDisposal
-import com.whoissio.eving.utils.SingleEvent
+import com.whoissio.eving.utils.objects.SingleEvent
 
 class SplashViewModel : BaseViewModel() {
 

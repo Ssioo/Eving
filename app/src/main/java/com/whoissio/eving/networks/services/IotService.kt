@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class IotService {
 
-    fun fetchMyIotDevices(): Single<BaseResponse<ArrayList<IotDevice>>> {
+    fun fetchMyIotDevices(): Single<BaseResponse<ArrayList<IotDevice?>>> {
         return ApplicationClass.retrofit.create(IotApi::class.java)
             .getAllDevices()
             .subscribeOn(Schedulers.io())

@@ -3,4 +3,12 @@
     <color name="colorPrimary">#E1B33D</color>
     <color name="colorPrimaryDark">#B1931D</color>
     <color name="colorAccent">#F75C4B</color>
+
+    <color name="chartColor1">#FFE00000</color>
+    <color name="chartColor2">#FF00E000</color>
+    <color name="chartColor3">#FF0000E0</color>
+    <color name="chartColor4">#FFE000E0</color>
+    <color name="chartColor5">#FF00E0E0</color>
+    <color name="chartColor6">#FFE0E000</color>
+    <color name="chartColor7">#FFBBBBBB</color>
 </resources>

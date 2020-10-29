@@ -1,8 +1,6 @@
 package com.whoissio.eving.networks
 
 import androidx.lifecycle.MutableLiveData
-import com.orhanobut.logger.Logger
-import com.whoissio.eving.utils.SingleEvent
 
 class NetworkEvent: MutableLiveData<NetworkEvent.NetworkState>() {
 

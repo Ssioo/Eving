@@ -6,6 +6,9 @@
         <variable
             name="vm"
             type="com.whoissio.eving.viewmodels.MyPageViewModel" />
+        <variable
+            name="pvm"
+            type="com.whoissio.eving.viewmodels.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

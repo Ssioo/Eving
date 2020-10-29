@@ -19,4 +19,7 @@ interface UserApi {
 
     @GET("/eving/users/token/verify")
     fun verifyToken(): Single<BaseResponse<Any>>
+
+    @DELETE("/eving/users")
+    fun resign(): Single<BaseResponse<Any>>
 }

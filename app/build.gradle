@@ -15,7 +15,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,8 +30,8 @@ android {
         }
     }
 
-    dataBinding {
-        enabled true
+    buildFeatures {
+        dataBinding true
     }
 
     compileOptions {
@@ -107,6 +107,16 @@ dependencies {
 
     // https://github.com/PhilJay/MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    
+    implementation 'com.polidea.rxandroidble2:rxandroidble:1.11.1'
+
+    // https://developer.android.com/jetpack/androidx/releases/navigation?hl=ko
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-dynamic-features-fragment:2.3.1'
+
+    // https://github.com/tommybuonomo/dotsindicator
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

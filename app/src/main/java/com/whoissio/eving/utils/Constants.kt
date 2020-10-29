@@ -1,5 +1,6 @@
 package com.whoissio.eving.utils
 
+import android.graphics.Color
 import java.util.*
 
 object Constants {
@@ -26,5 +27,8 @@ object Constants {
         "com.whoissio.eving.ACTION_GATT_SERVICES_DISCOVERED"
     const val ACTION_DATA_AVAILABLE = "com.whoissio.eving.ACTION_DATA_AVAILABLE"
     const val EXTRA_DATA = "com.example.bluetooth.le.EXTRA_DATA"
-    val UUID_DEVICE = UUID.fromString("")
+    val UUID_DEVICE = UUID.fromString("00002a00-0000-1000-8000-00805f9b34fb")
+    val UUID_DEVICE2 = UUID.fromString("0000FFE1-0000-1000-8000-00805f9b34fb")
+
+    val COLOR_SET = listOf(Color.WHITE, Color.GRAY, Color.YELLOW, Color.RED, Color.LTGRAY)
 }

@@ -7,21 +7,100 @@
         <variable
             name="vm"
             type="com.whoissio.eving.viewmodels.ContentsViewModel" />
+        <variable
+            name="pvm"
+            type="com.whoissio.eving.viewmodels.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_contents"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_contents"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vp_ads"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:overScrollMode="never"
+                    tools:listitem="@layout/item_ads"
+                    tools:itemCount="3"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/di_ads"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/vp_ads"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="12dp"
+                    app:dotsSize="6dp"
+                    app:dotsWidthFactor="2.5"
+                    app:dotsSpacing="3dp"
+                    app:dotsColor="#c8c8c8"
+                    app:selectedDotColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/tv_title_contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="인기 컨텐츠"
+                    android:textStyle="bold"
+                    android:textColor="#101010"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/vp_ads"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_refresh"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:letterSpacing="0"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingHorizontal="0dp"
+                    android:paddingVertical="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="12sp"
+                    android:textColor="#c8c8c8"
+                    android:onClick="@{() -> vm.tryFetchContents()}"
+                    app:layout_constraintTop_toTopOf="@id/tv_title_contents"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_title_contents"
+                    android:text="새로고침" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_contents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_contents"
+                    android:paddingVertical="10dp"
+                    android:clipToPadding="false"
+                    tools:listitem="@layout/item_contents"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

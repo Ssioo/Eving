@@ -34,8 +34,10 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".views.IotActivity" />
         <activity android:name=".views.ExerciseActivity" />
+        <activity android:name=".views.ExerciseRecordActivity" />
+        <activity android:name=".views.ExerciseRecordDetailActivity" />
 
-        <service android:name=".utils.BleGattService" />
+        <service android:name=".utils.BleGattService" android:enabled="true" />
     </application>
 
 </manifest>

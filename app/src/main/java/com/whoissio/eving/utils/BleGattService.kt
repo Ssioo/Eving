@@ -7,10 +7,9 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import com.orhanobut.logger.Logger
-import java.util.*
 
 
-class BleGattService: Service() {
+class BleGattService : Service() {
 
     private var mBluetoothManager: BluetoothManager? = null
     private var mBluetoothAdapter: BluetoothAdapter? = null
@@ -46,10 +45,22 @@ class BleGattService: Service() {
         // New services discovered
         override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
             when (status) {
-                BluetoothGatt.GATT_SUCCESS -> broadcastUpdate(Constants.ACTION_GATT_SERVICES_DISCOVERED)
+                BluetoothGatt.GATT_SUCCESS -> {
+                    broadcastUpdate(Constants.ACTION_GATT_SERVICES_DISCOVERED)
+                    gatt.services.forEach {
+                        setCharacteristicNotification(
+                            BluetoothGattCharacteristic(
+                                Constants.UUID_DEVICE2,
+                                BluetoothGattCharacteristic.PROPERTY_NOTIFY,
+                                BluetoothGattCharacteristic.PERMISSION_READ
+                            ), true
+                        )
+                    }
+                }
                 else -> Logger.d("onServicesDiscovered received: $status")
             }
         }
+
 
         // Result of a characteristic read operation
         override fun onCharacteristicRead(
@@ -57,11 +68,39 @@ class BleGattService: Service() {
             characteristic: BluetoothGattCharacteristic,
             status: Int
         ) {
+            Logger.d(characteristic)
             when (status) {
                 BluetoothGatt.GATT_SUCCESS -> {
                     broadcastUpdate(Constants.ACTION_DATA_AVAILABLE, characteristic)
                 }
             }
+        }
+
+        override fun onCharacteristicWrite(
+            gatt: BluetoothGatt?,
+            characteristic: BluetoothGattCharacteristic?,
+            status: Int
+        ) {
+            super.onCharacteristicWrite(gatt, characteristic, status)
+            Logger.d(characteristic?.value)
+        }
+
+        override fun onDescriptorWrite(
+            gatt: BluetoothGatt?,
+            descriptor: BluetoothGattDescriptor?,
+            status: Int
+        ) {
+            super.onDescriptorWrite(gatt, descriptor, status)
+            Logger.d(descriptor?.value)
+        }
+
+        override fun onDescriptorRead(
+            gatt: BluetoothGatt?,
+            descriptor: BluetoothGattDescriptor?,
+            status: Int
+        ) {
+            super.onDescriptorRead(gatt, descriptor, status)
+            Logger.d(descriptor?.value)
         }
     }
 
@@ -72,10 +111,14 @@ class BleGattService: Service() {
 
     private fun broadcastUpdate(action: String, characteristic: BluetoothGattCharacteristic) {
         val intent = Intent(action)
-
+        Logger.d("uuid" + characteristic.uuid)
+        Logger.d("value" + characteristic.value.toString())
+        Logger.d("hexString" + characteristic.value.joinToString(separator = " ") {
+            String.format("%02X", it)
+        })
         // This is special handling for the Heart Rate Measurement profile. Data
         // parsing is carried out as per profile specifications.
-        when (characteristic.uuid) {
+        /*when (characteristic.uuid) {
             Constants.UUID_DEVICE -> {
                 val flag = characteristic.properties
                 val format = when (flag and 0x01) {
@@ -102,8 +145,7 @@ class BleGattService: Service() {
                     intent.putExtra(Constants.EXTRA_DATA, "$data\n$hexString")
                 }
             }
-
-        }
+        }*/
         sendBroadcast(intent)
     }
 
@@ -174,9 +216,6 @@ class BleGattService: Service() {
      * released properly.
      */
     fun close() {
-        if (bluetoothGatt == null) {
-            return
-        }
         bluetoothGatt?.close()
         bluetoothGatt = null
     }
@@ -199,12 +238,13 @@ class BleGattService: Service() {
         }
         bluetoothGatt?.setCharacteristicNotification(characteristic, enabled)
         // This is specific to Heart Rate Measurement.
-        if (Constants.UUID_DEVICE == characteristic.uuid) {
-            val descriptor = characteristic.getDescriptor(
-                UUID.fromString("")
-            )
-            descriptor.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
-            bluetoothGatt?.writeDescriptor(descriptor)
+        if (Constants.UUID_DEVICE2 == characteristic.uuid) {
+
+        }
+        characteristic.descriptors.forEach {
+            bluetoothGatt?.readDescriptor(it.apply {
+                value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+            })
         }
     }
 
@@ -212,7 +252,7 @@ class BleGattService: Service() {
 
     private val mBinder = BleServiceBinder()
 
-    inner class BleServiceBinder: Binder() {
+    inner class BleServiceBinder : Binder() {
         fun getService(): BleGattService = this@BleGattService
     }
 }

@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface IotApi {
     @GET("/eving/iot/devices")
-    fun getAllDevices(): Single<BaseResponse<ArrayList<IotDevice>>>
+    fun getAllDevices(): Single<BaseResponse<ArrayList<IotDevice?>>>
 
     @POST("/eving/iot/devices")
     fun registerDevice(@Body param: Any): Single<BaseResponse<Any>>

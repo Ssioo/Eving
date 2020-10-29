@@ -3,7 +3,7 @@ package com.whoissio.eving
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.whoissio.eving.networks.NetworkEvent
-import com.whoissio.eving.utils.SingleEvent
+import com.whoissio.eving.utils.objects.SingleEvent
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 abstract class BaseViewModel : ViewModel() {

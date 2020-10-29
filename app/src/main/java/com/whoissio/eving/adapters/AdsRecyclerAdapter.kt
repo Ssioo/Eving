@@ -15,10 +15,4 @@ class AdsRecyclerAdapter(viewModel: ContentsViewModel) :
         layoutId = R.layout.item_ads
     ) {
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(recyclerView.context, RecyclerView.HORIZONTAL, false)
-    }
-
-
 }

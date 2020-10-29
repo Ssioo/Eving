@@ -8,8 +8,8 @@ import retrofit2.http.GET
 
 interface ContentsApi {
     @GET("/eving/contents")
-    fun getAllContents(): Single<BaseResponse<ArrayList<Contents>>>
+    fun getAllContents(): Single<BaseResponse<ArrayList<Contents?>>>
 
     @GET("/eving/contents/ads")
-    fun getAllAds(): Single<BaseResponse<ArrayList<Ads>>>
+    fun getAllAds(): Single<BaseResponse<ArrayList<Ads?>>>
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_exercise"
+    app:startDestination="@id/fg_measure">
+    <fragment
+        android:id="@+id/fg_measure"
+        android:name="com.whoissio.eving.views.ExerciseMeasureFragment"
+        tools:layout="@layout/fragment_exercise_measure">
+        <action
+            android:id="@+id/action_to_result"
+            app:destination="@id/fg_result" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fg_result"
+        android:name="com.whoissio.eving.views.ExerciseResultFragment"
+        tools:layout="@layout/fragment_exercise_result" />
+</navigation>

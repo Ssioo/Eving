@@ -11,6 +11,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -46,6 +47,14 @@ class IotActivity
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+
+        setSupportActionBar(binding?.tbIots)
+        supportActionBar?.apply {
+            setDisplayShowTitleEnabled(false)
+            setHomeAsUpIndicator(R.drawable.ic_back_white)
+            setDisplayHomeAsUpEnabled(true)
+        }
+
         rv_bles.adapter = viewmodel.newIotRecyclerAdapter
         rv_my_bles.adapter = viewmodel.myIotAdapter
         btn_edit_bles.setOnClickListener {
@@ -75,6 +84,13 @@ class IotActivity
         } else {
             tryScanIotDevices()
         }
+
+        viewmodel.myIots.observe(this) { viewmodel.myIotAdapter.setItems(it) }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) finish()
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

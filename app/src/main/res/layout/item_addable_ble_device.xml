@@ -1,55 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/text_device_name_ble"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="text"
-        android:textColor="#333333"
-        android:textSize="14sp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        />
+    <data>
+        <variable
+            name="item"
+            type="android.bluetooth.BluetoothDevice" />
+    </data>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_connect_ble"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:padding="0dp"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:text="연결"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/v_separator"
-        android:layout_marginEnd="20dp"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <View
-        android:id="@+id/v_separator"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="#efefef"
-        app:layout_constraintTop_toBottomOf="@id/text_device_name_ble"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        />
+        <TextView
+            android:id="@+id/text_device_name_ble"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="text"
+            android:text="@{item.name ?? item.address}"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_connect_ble"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:text="연결"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/v_separator"
+            android:layout_marginEnd="20dp" />
+
+        <View
+            android:id="@+id/v_separator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#efefef"
+            app:layout_constraintTop_toBottomOf="@id/text_device_name_ble"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

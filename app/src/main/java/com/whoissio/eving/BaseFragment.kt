@@ -12,25 +12,28 @@ import androidx.fragment.app.Fragment
 import com.whoissio.eving.networks.NetworkEvent
 import com.whoissio.eving.utils.components.SimpleMessageDialog
 
-abstract class BaseFragment<B: ViewDataBinding, VM: BaseViewModel>(@LayoutRes override val layoutId: Int): Fragment(layoutId), BaseFragmentView<VM> {
-
-    protected lateinit var viewmodel: VM
-    protected var binding: B? = null
+abstract class BaseFragment<B: ViewDataBinding, VM: BaseViewModel, PVM: BaseViewModel>(@LayoutRes override val layoutId: Int)
+    : Fragment(layoutId), BaseFragmentView<VM, PVM> {
+    protected lateinit var vm: VM
+    protected lateinit var pvm: PVM
+    protected lateinit var binding: B
 
     protected var progressDialog: ProgressDialog? = null
     protected var messageDialog: SimpleMessageDialog? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = DataBindingUtil.bind(view)
-        viewmodel = getViewModel()
-        binding?.setVariable(BR.vm, viewmodel)
-        binding?.lifecycleOwner = this
+        binding = DataBindingUtil.bind(view)!!
+        vm = getViewModel()
+        pvm = getParentViewModel()
+        binding.setVariable(BR.vm, vm)
+        binding.setVariable(BR.pvm, pvm)
+        binding.lifecycleOwner = this
 
         /* Data Observing */
-        viewmodel.toastEvent.observe(viewLifecycleOwner, { it.get()?.let { showToast(getString(it)) }})
-        viewmodel.alertEvent.observe(viewLifecycleOwner, { it.get()?.let { showSimpleMessageDialog(getString(it)) }})
-        viewmodel.networkEvent.observe(viewLifecycleOwner, { onNetworkEventChanged(it) })
+        vm.toastEvent.observe(viewLifecycleOwner, { it.get()?.let { showToast(getString(it)) }})
+        vm.alertEvent.observe(viewLifecycleOwner, { it.get()?.let { showSimpleMessageDialog(getString(it)) }})
+        vm.networkEvent.observe(viewLifecycleOwner, { onNetworkEventChanged(it) })
 
         initView(savedInstanceState)
     }
@@ -73,10 +76,12 @@ abstract class BaseFragment<B: ViewDataBinding, VM: BaseViewModel>(@LayoutRes ov
     }
 }
 
-interface BaseFragmentView<VM : BaseViewModel> {
+interface BaseFragmentView<VM : BaseViewModel, PVM: BaseViewModel> {
     @get:LayoutRes val layoutId : Int
 
     fun getViewModel() : VM
+
+    fun getParentViewModel() : PVM
 
     fun onNetworkEventChanged(networkState: NetworkEvent.NetworkState?)
 
